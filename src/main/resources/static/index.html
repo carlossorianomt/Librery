@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Librery</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<body>
+<h1> LIBRERIA</h1>
+<input id="nameClient" placeholder="Nombre"><br>
+<input id="emailClient" placeholder="Correo"><br>
+<input id="ageClient" type="number" placeholder="Edad"><br>
+<input id="passwordClient" type="password" placeholder="Contraseña"><br>
+
+<button onclick="saveClient()">Guardar Nuevo</button>
+<hr>
+<div id="loginbutton">
+    <a href="/oauth2/authorization/github">Iniciar Sesión<img src="img/githublogo.png" width="45"> </a>
+</div>
+<div id="username" style="display:none">
+
+</div>
+<div id="resultado"></div>
+<div id="otroForm" style="display: none">
+    <input id="idMyClient" type="hidden">
+    <input id="data1" placeholder="Dato 1"><br>
+    <input id="data2" placeholder="Dato 2"><br>
+    <input id="data3" placeholder="Dato 3"><br>
+    <button onclick="sendOtraData()">Enviar Info!</button>
+</div>
+</body>
+<script type="text/javascript" src="js/scriptClients.js"></script>
+
+<script type="text/javascript">
+
+    $.get("/user",function(data){
+        $("#loginbutton").hide();
+        $("#username").show();
+        let k="Bienvenido "+data.name;
+        k+=" <img src='"+data.avatar_url+"' width='45'>";
+        console.log(data);
+        $("#username").html(k);
+    });
+
+</script>
+
+</html>
