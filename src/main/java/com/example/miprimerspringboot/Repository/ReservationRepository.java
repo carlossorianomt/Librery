@@ -20,6 +20,13 @@ public class ReservationRepository {
         return (List<Reservation>) reservationCRUDRepository.findAll();
     }
 
+    public Optional<Reservation> getReservation(int id) {
+        return reservationCRUDRepository.findById(id);
+    }
+    public Optional<Reservation> getById(int id){
+        return reservationCRUDRepository .findById(id);
+    }
+
     public Reservation save(Reservation r){
         return reservationCRUDRepository.save(r);
     }
@@ -28,9 +35,19 @@ public class ReservationRepository {
         reservationCRUDRepository.delete(c);
     }
 
-    public Optional<Reservation> getReservation(int id) {
-        return reservationCRUDRepository.findById(id);
+    public List<Reservation> getDatesReport(Date inicio,Date fin){
+        return reservationCRUDRepository.findAllByStartDateAfterAndStartDateBefore(inicio,fin);
     }
+
+    public List<Reservation> getStatusReport(String sts){
+        return reservationCRUDRepository.findAllByStatus(sts);
+    }
+
+    public List<Object[]> getTopClients(){
+        return reservationCRUDRepository.getTopClients();
+    }
+
+
 
 
 

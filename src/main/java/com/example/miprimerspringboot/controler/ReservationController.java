@@ -2,6 +2,8 @@ package com.example.miprimerspringboot.controler;
 
 
 import com.example.miprimerspringboot.entidades.Reservation;
+import com.example.miprimerspringboot.entidades.dto.StatusAccount;
+import com.example.miprimerspringboot.entidades.dto.TopClients;
 import com.example.miprimerspringboot.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +24,31 @@ public class ReservationController {
         return reservationService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
-        return reservationService.getReservation(reservationId);
-    }
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation save(@RequestBody Reservation r){
         return reservationService.save(r);
+    }
+
+    @GetMapping("/report-dates/{dateA}/{dateB}")
+    public List<Reservation> getByDates(@PathVariable("dateA")String da,@PathVariable("dateB")String db ){
+        return reservationService.getReservationsByPeriod(da,db);
+    }
+
+    @GetMapping("/report-status")
+    public StatusAccount getByStatus(){
+        return reservationService.getReportByStatus();
+    }
+
+    @GetMapping("/report-clients")
+    public List<TopClients> getTopClients(){
+        return reservationService.getTopclients();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
+        return reservationService.getReservation(reservationId);
     }
 
     @DeleteMapping("/{id}")
