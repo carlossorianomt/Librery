@@ -28,4 +28,8 @@ public class ClientRepository {
         return clientCRUDRepository.findById(id);
     }
 
+    public void delete(Client c){
+        clientCRUDRepository.delete(c);
+    }
+
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ReservationCRUDRepository extends CrudRepository<Reservation,Integer>  {
 
-   public List<Reservation> findAllByStartDateAfterAndStartDateBefore(Date dateOne, Date dateTwo);
+  // public List<Reservation> findAllByStartDateAfterAndStartDateBefore(Date dateOne, Date dateTwo);
 }

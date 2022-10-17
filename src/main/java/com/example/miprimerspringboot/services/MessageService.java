@@ -1,6 +1,7 @@
 package com.example.miprimerspringboot.services;
 
 import com.example.miprimerspringboot.Repository.MessageRepository;
+import com.example.miprimerspringboot.entidades.Category;
 import com.example.miprimerspringboot.entidades.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,14 @@ public class MessageService {
     }
     public Optional<Message> getById(int id){
         return messageRepository.getById(id);
+    }
+
+    public boolean delete(int id) {
+        Optional<Message> cOp = messageRepository.getById(id);
+        if (cOp.isPresent()) {
+            messageRepository.delete(cOp.get());
+            return true;
+        }
+        return false;
     }
 }

@@ -23,7 +23,11 @@ public class MessageRepository {
         return messageCRUDRepository.save(m);
     }
 
-    public Optional<Message> getById(int idmessage){
-        return messageCRUDRepository.findById(idmessage);
+    public Optional<Message> getById(int id){
+        return messageCRUDRepository.findById(id);
+    }
+
+    public void delete(Message m){
+        messageCRUDRepository.delete(m);
     }
 }

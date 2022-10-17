@@ -4,9 +4,11 @@ package com.example.miprimerspringboot.controler;
 import com.example.miprimerspringboot.entidades.Reservation;
 import com.example.miprimerspringboot.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Reservation")
@@ -19,13 +21,22 @@ public class ReservationController {
     public List<Reservation>getAll(){
         return reservationService.getAll();
     }
+
+    @GetMapping("/{id}")
+    public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
+        return reservationService.getReservation(reservationId);
+    }
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public Reservation save(@RequestBody Reservation r){
         return reservationService.save(r);
     }
-    @GetMapping("/report/{d1}/{d2}")
-    public List<Reservation> getReservationsPeriod(@PathVariable("d1") String d1, @PathVariable("d2") String d2){
-        return reservationService.getReservationsPeriod(d1,d2);
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int id){
+        return reservationService.deleteReservation(id);
     }
+
 
 }

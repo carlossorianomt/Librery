@@ -31,4 +31,10 @@ public class MessageController {
     public Optional<Message> getMessage(@PathVariable ("id")int messageId){
         return messageService.getById(messageId);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int id){
+        return messageService.delete(id);
+    }
 }
